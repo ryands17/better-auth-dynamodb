@@ -321,4 +321,4 @@ Contributions are welcome! Please ensure:
 
 For issues and questions:
 - Better-Auth specific: [Better-Auth GitHub](https://github.com/better-auth/better-auth)
-- This implementation: [Create an issue](https://github.com/your-repo/issues)
+- This implementation: [Create an issue](https://github.com/renanwilliam/better-auth-dynamodb/issues)
