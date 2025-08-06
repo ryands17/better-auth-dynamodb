@@ -1,5 +1,5 @@
 import "dotenv/config";
-import * as express from "express";
+import express from "express";
 import { toNodeHandler } from "better-auth/node";
 import { auth } from "./lib/auth";
 

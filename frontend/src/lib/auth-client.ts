@@ -10,7 +10,7 @@ import {
 } from "better-auth/client/plugins";
 import {toast} from "sonner";
 
-export const client = createAuthClient({
+export const authClient = createAuthClient({
     plugins: [
         organizationClient(),
         twoFactorClient({
@@ -41,4 +41,4 @@ export const {
     organization,
     useListOrganizations,
     useActiveOrganization,
-} = client;
+} = authClient;
