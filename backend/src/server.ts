@@ -1,17 +1,27 @@
-import "dotenv/config";
-import express from "express";
-import { toNodeHandler } from "better-auth/node";
-import { auth } from "./lib/auth";
+import { serve } from '@hono/node-server';
+import 'dotenv/config';
+import { Hono } from 'hono';
+import { cors } from 'hono/cors';
+import { auth } from './lib/auth';
 
-const app = express();
-const port = 8000;
+const app = new Hono();
 
-app.all('/api/auth/{*any}', toNodeHandler(auth));
+app.use(
+  '*', // or replace with "*" to enable cors for all routes
+  cors({
+    origin: 'http://localhost:3001', // replace with your origin
+    allowHeaders: ['Content-Type', 'Authorization'],
+    allowMethods: ['POST', 'GET', 'OPTIONS'],
+    exposeHeaders: ['Content-Length'],
+    maxAge: 600,
+    credentials: true,
+  }),
+);
 
-// Mount express json middleware after Better Auth handler
-// or only apply it to routes that don't interact with Better Auth
-app.use(express.json());
-
-app.listen(port, () => {
-    console.log(`Better Auth app listening on port ${port}`);
+app.on(['POST', 'GET'], '/api/auth/*', (c) => {
+  return auth.handler(c.req.raw);
 });
+
+serve(app, (info) =>
+  console.info(`App running on http://localhost:${info.port}`),
+);
