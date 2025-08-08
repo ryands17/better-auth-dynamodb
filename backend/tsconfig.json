@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "moduleResolution": "Node",
-    "emitDeclarationOnly": true,
-    "declaration": true,
+    "moduleResolution": "bundler",
+    "declaration": false,
+    "declarationMap": false,
     "esModuleInterop": true
   },
   "exclude": ["node_modules", "**/*.spec.ts"]

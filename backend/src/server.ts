@@ -9,7 +9,7 @@ const app = new Hono();
 app.use(
   '*', // or replace with "*" to enable cors for all routes
   cors({
-    origin: 'http://localhost:3001', // replace with your origin
+    origin: 'http://localhost:5173', // replace with your origin
     allowHeaders: ['Content-Type', 'Authorization'],
     allowMethods: ['POST', 'GET', 'OPTIONS'],
     exposeHeaders: ['Content-Length'],
@@ -17,6 +17,10 @@ app.use(
     credentials: true,
   }),
 );
+
+app.get('/', (c) => {
+  return c.json({ success: true });
+});
 
 app.on(['POST', 'GET'], '/api/auth/*', (c) => {
   return auth.handler(c.req.raw);
